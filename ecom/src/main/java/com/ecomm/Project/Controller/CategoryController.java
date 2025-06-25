@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,9 +28,16 @@ public class CategoryController {
         this.categoryService = categoryService;   
     }
 
-    @GetMapping("/home")
-    public String hello(){
-        return "hello";
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping("/admin")
+    public String admin(){
+        return "hello admin";
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/user")
+    public String user(){
+        return "hello user";
     }
 
     @GetMapping("/api/public/categories")
