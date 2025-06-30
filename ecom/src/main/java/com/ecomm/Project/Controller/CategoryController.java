@@ -2,15 +2,32 @@ package com.ecomm.Project.Controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ecomm.Project.Configuration.AppConstants;
+import com.ecomm.Project.JWT.JwtUtils;
+import com.ecomm.Project.JWT.LoginRequest;
+import com.ecomm.Project.JWT.LoginResponse;
 import com.ecomm.Project.Payload.CategoryDTORequest;
 import com.ecomm.Project.Payload.CategoryDTOResponse;
 import com.ecomm.Project.Service.CategoryService;
 
 import jakarta.validation.Valid;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,17 +45,53 @@ public class CategoryController {
         this.categoryService = categoryService;   
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/admin")
-    public String admin(){
-        return "hello admin";
-    }
+    // @Autowired
+    // private AuthenticationManager authenticationManager;
 
-    @PreAuthorize("hasRole('USER')")
-    @GetMapping("/user")
-    public String user(){
-        return "hello user";
-    }
+    // @Autowired 
+    // private JwtUtils jwtUtils;
+
+
+    // @PreAuthorize("hasRole('ADMIN')")
+    // @GetMapping("/admin")
+    // public String admin(){
+    //     return "hello admin";
+    // }
+
+    // @PreAuthorize("hasRole('USER')")
+    // @GetMapping("/user")
+    // public String user(){
+    //     return "hello user";
+    // }
+
+    // @PostMapping("/signin")
+    // public ResponseEntity<?> authenticateUser(@RequestBody LoginRequest loginRequest) {
+    //     Authentication authentication;
+    //     try{
+    //         authentication = authenticationManager.authenticate(
+    //             new UsernamePasswordAuthenticationToken(
+    //             loginRequest.getUsername(),
+    //             loginRequest.getPassword()
+    //         ));
+    //     }catch(AuthenticationException exception){
+    //         Map<String, Object> map = new HashMap<>();
+    //         map.put("message", "Bad Credentials");
+    //         map.put("status", false);
+
+    //         return new ResponseEntity<Object >(map, HttpStatus.NOT_FOUND);
+    //     }
+    //     SecurityContextHolder.getContext().setAuthentication(authentication);
+    //     UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    //     String jwtToken = jwtUtils.generateTokenFromUsername(userDetails);
+    //     List<String> roles = userDetails.getAuthorities().stream()
+    //     .map(item->item.getAuthority())
+    //     .collect(Collectors.toList());
+
+    //     LoginResponse response = new LoginResponse(userDetails.getUsername(), jwtToken,roles);
+
+    //     return ResponseEntity.ok(response);
+    // }
+    
 
     @GetMapping("/api/public/categories")
     public CategoryDTOResponse getAllCategories(@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
