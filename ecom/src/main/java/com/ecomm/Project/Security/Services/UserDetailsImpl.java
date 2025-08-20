@@ -44,9 +44,9 @@ public class UserDetailsImpl implements UserDetails{
 
         return new UserDetailsImpl(
             user.getUserID(),
-            user.getUserName(),
+            user.getUsername(),
             user.getEmail(),
-            user.getPassWord(),
+            user.getPassword(),
             authorities
         );
     }
@@ -79,12 +79,12 @@ public class UserDetailsImpl implements UserDetails{
 
     @Override
     public boolean isCredentialsNonExpired() {
-       return false;
+       return true;
     }
 
     @Override
     public boolean isEnabled() {
-      return false;
+      return true;
     }
 
     @Override

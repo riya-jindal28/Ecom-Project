@@ -41,9 +41,9 @@ public class JwtUtils {
 
     //Generating Token from Username
     public String generateTokenFromUsername(UserDetails userDetails){
-        String userName = userDetails.getUsername();
+        String username = userDetails.getUsername();
         return Jwts.builder()
-              .subject(userName)
+              .subject(username)
               .issuedAt(new Date())
               .expiration(new Date((new Date().getTime() + JwtExpiration)))
               .signWith(key())

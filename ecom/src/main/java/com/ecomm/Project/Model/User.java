@@ -32,7 +32,7 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @Table(name = "users", uniqueConstraints = {
-    @UniqueConstraint(columnNames = "userName"),
+    @UniqueConstraint(columnNames = "username"),
     @UniqueConstraint(columnNames = "email")
 })
 public class User {
@@ -43,8 +43,8 @@ public class User {
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "userName")
-    private String userName;
+    @Column(name = "username")
+    private String username;
 
     @NotBlank
     @Size(max  = 50)
@@ -55,12 +55,12 @@ public class User {
     @NotBlank
     @Size(max = 120)
     @Column(name = "password")
-    private String passWord;
+    private String password;
 
-    public User(String userName, String email, String passWord) {
-        this.userName = userName;
+    public User(String username, String email, String password) {
+        this.username = username;
         this.email = email;
-        this.passWord = passWord;
+        this.password = password;
     }
 
     @Getter
