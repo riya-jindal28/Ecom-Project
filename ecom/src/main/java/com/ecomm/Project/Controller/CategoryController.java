@@ -98,7 +98,7 @@ public class CategoryController {
     @GetMapping("/public/categories")
     public CategoryDTOResponse getAllCategories(@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
                                                 @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
-                                                @RequestParam(name = "sortBy", required = true) String sortBy,
+                                                @RequestParam(name = "sortBy", defaultValue =  AppConstants.SORT_CATEGORY_BY, required = false) String sortBy,
                                                 @RequestParam(name = "sortOrder", defaultValue = AppConstants.SORT_ORDER, required = false) String sortOrder){
         CategoryDTOResponse categoryDTOResponse = categoryService.getAllCategories(pageNumber, pageSize, sortBy, sortOrder);
         return categoryDTOResponse;
