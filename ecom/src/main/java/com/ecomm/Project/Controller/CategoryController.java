@@ -95,7 +95,7 @@ public class CategoryController {
     // }
     
 
-    @GetMapping("/api/public/categories")
+    @GetMapping("/public/categories")
     public CategoryDTOResponse getAllCategories(@RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
                                                 @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
                                                 @RequestParam(name = "sortBy", required = true) String sortBy,
@@ -104,13 +104,13 @@ public class CategoryController {
         return categoryDTOResponse;
     }
 
-    @PostMapping("/api/public/category")
+    @PostMapping("/public/category")
     public ResponseEntity<CategoryDTORequest> createCategory(@Valid @RequestBody CategoryDTORequest category){
         CategoryDTORequest categoryDTORequest = categoryService.createCategory(category);
         return new ResponseEntity<>(categoryDTORequest, HttpStatus.CREATED);
     }
 
-    @DeleteMapping("/api/admin/category/delete/{categoryID}")
+    @DeleteMapping("/admin/category/delete/{categoryID}")
     public ResponseEntity<CategoryDTORequest> deleteCategory(@PathVariable Long categoryID){
         
             CategoryDTORequest delCategoryDTORequest = categoryService.deleteCategory(categoryID);
@@ -118,7 +118,7 @@ public class CategoryController {
        
     }
 
-    @PutMapping("/api/public/category/update/{categoryID}")
+    @PutMapping("/public/category/update/{categoryID}")
     public ResponseEntity<CategoryDTORequest> updateCategory(@Valid @RequestBody CategoryDTORequest categoryDTO, 
                                                 @PathVariable Long categoryID){
        

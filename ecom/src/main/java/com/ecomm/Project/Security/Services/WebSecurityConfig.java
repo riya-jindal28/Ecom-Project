@@ -69,7 +69,7 @@ public class WebSecurityConfig {
         authorizeRequests.requestMatchers("/api/auth/**").permitAll()
         .requestMatchers("/v3/api-docs").permitAll()
         .requestMatchers("/h2-console/**").permitAll()
-        // .requestMatchers("/api/public/**").permitAll()
+        .requestMatchers("/api/public/**").permitAll()
         .anyRequest().authenticated()
         );
         http.authenticationProvider(authenticationProvider());

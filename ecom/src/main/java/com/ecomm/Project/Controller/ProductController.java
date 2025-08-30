@@ -31,13 +31,13 @@ public class ProductController {
     @Autowired
     ProductService productService;
 
-    @PostMapping("api/admin/categories/{categoryID}/product")
+    @PostMapping("/admin/categories/{categoryID}/product")
     public ResponseEntity<ProductDTORequest> addProduct(@RequestBody Product product, @PathVariable Long categoryID){
        ProductDTORequest productDTO = productService.addProduct(product, categoryID);
        return new ResponseEntity<>(productDTO,HttpStatus.CREATED);
     }
 
-    @GetMapping("api/public/products")
+    @GetMapping("/public/products")
     public ResponseEntity<ProductDTOResponse> getAllProducts(
         @RequestParam(name = "pageNumber", defaultValue = AppConstants.PAGE_NUMBER, required = false) Integer pageNumber,
         @RequestParam(name = "pageSize", defaultValue = AppConstants.PAGE_SIZE, required = false) Integer pageSize,
@@ -49,19 +49,19 @@ public class ProductController {
         return new ResponseEntity<>(productDTOResponse, HttpStatus.OK);
     }
 
-    @GetMapping("api/public/categories/{categoryID}/products")
+    @GetMapping("/public/categories/{categoryID}/products")
     public ResponseEntity<ProductDTOResponse> getProductsByCategory(@PathVariable Long categoryID){
         ProductDTOResponse productDTOResponse = productService.searchByCategory(categoryID);
         return new ResponseEntity<>(productDTOResponse, HttpStatus.OK);
     }
 
-    @GetMapping("api/public/products/keyword/{keyword}")
+    @GetMapping("/public/products/keyword/{keyword}")
     public ResponseEntity<ProductDTOResponse> getProductsByKeyword(@PathVariable String keyword){
         ProductDTOResponse productDTOResponse = productService.searchProductByKeyword(keyword);
         return new ResponseEntity<>(productDTOResponse, HttpStatus.FOUND);
     }
 
-    @PutMapping("api/admin/products/{productID}")
+    @PutMapping("/admin/products/{productID}")
     public ResponseEntity<ProductDTORequest> updateProduct(@RequestBody Product product,
                                                         @PathVariable Long productID){
 
@@ -69,13 +69,13 @@ public class ProductController {
         return new ResponseEntity<>(updateproductDTO, HttpStatus.OK);
     }
 
-    @DeleteMapping("api/admin/products/{productID}")
+    @DeleteMapping("/admin/products/{productID}")
     public ResponseEntity<ProductDTORequest> deleteProduct(@PathVariable Long productID){
         ProductDTORequest deleteProductDTO = productService.deleteProduct(productID);
         return new ResponseEntity<>(deleteProductDTO, HttpStatus.OK);
     }
 
-    @PutMapping("api/admin/products/{productID}/image")
+    @PutMapping("/admin/products/{productID}/image")
     public ResponseEntity<ProductDTORequest> updateProductImage(@PathVariable Long productID, @RequestParam("image")MultipartFile image) throws IOException {
        
         ProductDTORequest updateImageDTO = productService.updateProductImage(productID, image);
