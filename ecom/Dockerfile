@@ -6,8 +6,8 @@ WORKDIR /workspace
 RUN apt-get update && apt-get install -y maven
 
 # Copy pom and source
-COPY pom.xml .
-COPY src ./src
+COPY ./ecom/pom.xml .
+COPY src ./ecom/src
 
 # Build jar (skip tests for faster builds)
 RUN mvn -DskipTests clean package
