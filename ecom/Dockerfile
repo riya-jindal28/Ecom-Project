@@ -1,6 +1,9 @@
 # ---------- Build stage ----------
-FROM maven:3.9.6-eclipse-temurin-23 AS build
+FROM eclipse-temurin:23 AS build
 WORKDIR /workspace
+
+# Install Maven manually
+RUN apt-get update && apt-get install -y maven
 
 # Copy pom and source
 COPY pom.xml .
