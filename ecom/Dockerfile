@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y maven
 
 # Copy pom and source
 COPY ./ecom/pom.xml .
-COPY src ./ecom/src
+COPY ./ecom/src ./src
 
 # Build jar (skip tests for faster builds)
 RUN mvn -DskipTests clean package
